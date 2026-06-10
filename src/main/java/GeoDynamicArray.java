@@ -7,7 +7,6 @@
  * getSensor(index) — retrieves a sensor by position
  * printAll() — lists all currently active sensors
  */
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
