@@ -29,6 +29,14 @@ public class Main {
         System.out.println(testOne.getSensor(6
         ));
 
+        testOne.removeSensor(0);
+        System.out.println("\nRemoving Item:");
+        testOne.printAll();
+
+        testOne.removeSensor(10);
+        System.out.println("\nRemoving Item:");
+        testOne.printAll();
+
 //        System.out.println("\n");
 //        testOne.addSensor("CO2 Scrubber");
 //        System.out.println("Inserting: CO2 Scrubber");

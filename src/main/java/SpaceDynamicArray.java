@@ -2,21 +2,22 @@ import java.util.IllegalFormatException;
 //import java.util.logging.Logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import lombok.Getter;
 
 /**
  * June 6 2026
  * @author geoluread
  * Class the mimics the ArrayList class, but created from scratch to understand the process
- * addSensor(name) — adds a sensor to the active list, resizes the internal array if full
- * removeSensor(index) — decommissions a sensor by index, shifts remaining sensors down
- * getSensor(index) — retrieves a sensor by position
- * printAll() — lists all currently active sensors
+ * addSensor(name) — adds a sensor to the active list, resizes the internal array if full -- Done
+ * removeSensor(index) — decommissions a sensor by index, shifts remaining sensors down -- Done
+ * getSensor(index) — retrieves a sensor by position -- Done
+ * printAll() — lists all currently active sensorsn -- Done
  */
 
 public class SpaceDynamicArray {
     //Instance variables
     private static final int DEFAULT_SIZE = 2;
-    private String[] TEMP_ARRAY;
+    @Getter private String[] tempArray;
     private int counter = 0;
     private int size = 0;
 
@@ -26,13 +27,24 @@ public class SpaceDynamicArray {
 
     //Constructor methods
     public SpaceDynamicArray(){
-        TEMP_ARRAY = new String[DEFAULT_SIZE];
+        tempArray = new String[DEFAULT_SIZE];
         logger.info("Dynamic Array Created");
     }
 
+    //Constructor methods
+//    public SpaceDynamicArray(String[] presetValues){
+//        TEMP_ARRAY = new String[presetValues.length];
+//        int i = 0;
+//        for(String x: presetValues){
+//            TEMP_ARRAY[i] = x;
+//            i++;
+//        }
+//        logger.info("Preset Dynamic Array Created");
+//    }
+
     //Returns integer that is the size of the array
     public int size(){
-        return TEMP_ARRAY.length;
+        return tempArray.length;
     }
 
     //Returns true if the array is empty or equals 0. Returns false if array is not equal to 0.
@@ -48,8 +60,8 @@ public class SpaceDynamicArray {
      */
     public void printAll(){
         String display = "";
-        for(String x: TEMP_ARRAY){
-             if(x == TEMP_ARRAY[0]){
+        for(String x: tempArray){
+             if(x == tempArray[0]){
                  System.out.print(x);
              }
             else if(x!=null){
@@ -65,7 +77,7 @@ public class SpaceDynamicArray {
      */
     public String getSensor(int position) {
         try{
-            return TEMP_ARRAY[position];
+            return tempArray[position];
         }
         catch(IndexOutOfBoundsException e){
             logger.error("Exception is captured - Index out of Bounds");
@@ -83,29 +95,48 @@ public class SpaceDynamicArray {
      * @param sensorName
      */
     public void addSensor(String sensorName){
-        if(counter == TEMP_ARRAY.length){
+        if(counter == tempArray.length){
             //Extend the array
-            String[] oldArray = TEMP_ARRAY.clone();
-            TEMP_ARRAY = new String[oldArray.length*2];
-            size = TEMP_ARRAY.length;
+            String[] oldArray = tempArray.clone();
+            tempArray = new String[oldArray.length*2];
+            size = tempArray.length;
             counter = 0;    //Set the counter
 
             for(String arrayValue: oldArray){
-                TEMP_ARRAY[counter] = arrayValue;
+                tempArray[counter] = arrayValue;
                 counter++;
             }
 
             //Append the new value
-            TEMP_ARRAY[counter++] = sensorName;
+            tempArray[counter++] = sensorName;
         }
         else{
-            TEMP_ARRAY[counter] = sensorName;
+            tempArray[counter] = sensorName;
             counter++;
         }
     }
 
+    /**
+     * Method to remove a item from the array, given the position is provided by the user
+     * @param index
+     */
     public void removeSensor(int index){
-
+        if(index>= 0){
+            if(index > tempArray.length){
+                System.out.println("\n\nInvalid Index Position - Nothing removed from array");
+                logger.error("Invalid Index Position");
+            }
+            else{
+                for(int i = index; i < tempArray.length; i++){
+                    if(i+1 != tempArray.length){
+                        tempArray[i] = tempArray[i+1];
+                    }
+                    else{
+                        tempArray[i] = null;
+                    }
+                }
+            }
+        }
     }
 
     //---------------------------------------   EOF
