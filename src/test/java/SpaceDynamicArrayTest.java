@@ -26,7 +26,6 @@ class SpaceDynamicArrayTest {
     }
 
     @Test
-    @BeforeEach
     void addSensor() {
         testOne.addSensor("GPS");
         testOne.addSensor("LIDAR");

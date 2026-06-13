@@ -1,11 +1,22 @@
 import lombok.Getter;
 import lombok.Setter;
+import java.util.LinkedList;
 
 public class Node {
-    @Getter @Setter String data = null;
-    @Getter @Setter String next = null;
+    @Getter @Setter String data;
+    @Getter @Setter Node next;
 
     public Node(){
+    }
+
+    public Node(String d){
+        data = d;
+        next = null;
+    }
+
+    public Node(String d, Node nextNode){
+        data = d;
+        next = nextNode;
     }
 
     public boolean has_next(){
@@ -15,9 +26,5 @@ public class Node {
         else{
             return false;
         }
-    }
-
-    public void apppend(String next_node){
-        next = next_node;
     }
 }
