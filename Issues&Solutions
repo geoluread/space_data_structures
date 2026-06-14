@@ -1,0 +1,15 @@
+Space Data Structures
+
+@author: Geoluread
+@date: June 14, 2026
+
+Template
+Issues:
+--> Solution:
+
+1. Issue: JUnit keeps throwing an error that node3 is not found in the setData test method
+--> Solution:
+I needed to create an instance of the class and then in the setUp() method run the initalization of it to be used in the setData() method.
+Class Instance - private Node node3;
+setUp initalization - node3 = new Node();
+setData test - node3.setData("blueberries"):

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class SpaceLinkedList {
 
-    Node head; //Head
+    Node head; //Head - null by default
     int counter;
 
     public SpaceLinkedList(){
