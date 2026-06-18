@@ -113,7 +113,7 @@ public class SpaceLinkedList {
                 return head;
             }
         }
-        else return null;
+        return null;
 
     }
 }

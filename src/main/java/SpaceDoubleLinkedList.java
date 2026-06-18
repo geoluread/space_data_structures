@@ -1,3 +1,7 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.PrintStream;
 
 public class SpaceDoubleLinkedList {
     Node current;
@@ -5,6 +9,8 @@ public class SpaceDoubleLinkedList {
     Node head;
     Node tail;
     int counter;
+    Logger log = LoggerFactory.getLogger(SpaceDynamicArray.class);
+    static PrintStream p = System.out;
 
     public SpaceDoubleLinkedList(){
         counter = 0;
@@ -37,6 +43,31 @@ public class SpaceDoubleLinkedList {
         }
     }
 
+    //Can return a null node
+    public String search(String target){
+        log.info("Searching Linked List");
+        current = head;
+        if(current == null){
+            p.println("List is empty. ["+target+"] does not exist");
+            log.info("List is empty. ["+target+"] does not exist");
+            return "Not Found";
+        }
+        else{
+            while(current != null){
+                if(current.getData() == target){
+                    log.info("Target Found. ["+target+"] does exist");
+                    return "Found";
+
+                }
+                current = current.getNext();
+            }
+            log.info("List is empty. ["+target+"] does not exist");
+            return "Not Found";
+        }
+
+    }
+
+
 
     public static void main(String[] args){
         SpaceDoubleLinkedList testOne = new SpaceDoubleLinkedList();
@@ -46,6 +77,8 @@ public class SpaceDoubleLinkedList {
         testOne.insertInFront("C");
         testOne.insertToBack("Z");
         testOne.insertToBack("Y");
+
+        testOne.search("Z");
 
         System.out.println("Completed");
 
