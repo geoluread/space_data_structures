@@ -6,6 +6,7 @@ import java.io.PrintStream;
 public class SpaceDoubleLinkedList {
     Node current;
     Node prev;
+    Node next;
     Node head;
     Node tail;
     int counter;
@@ -67,6 +68,47 @@ public class SpaceDoubleLinkedList {
 
     }
 
+    public void delete(String target){
+        log.info("Removing [" + target + "] from Double Linked List");
+        current = head;
+        prev = null;
+        next = null;
+
+        if(head == null){
+            log.error("List is empty. ["+target+"] does not exist");
+            p.println("List is empty. ["+target+"] does not exist");
+        }
+        else{
+
+            //Node is at the front of the list
+            if(current.getData() == target){
+                head = current.getNext();
+                head.prepend(null);
+                return;
+            }
+            //Node is at the end of the list
+            else if(tail.getData() == target){
+                tail = tail.getPrev();
+                tail.append(null);
+                return;
+            }
+
+            while(current != null){
+                if(current.getData() == target){
+                    prev = current.getPrev();
+                    prev.append(current.getNext());
+                    next = current.getNext();
+                    next.prepend(current.getPrev());
+                    current = null;
+                    return;
+                }
+                else{
+                    current = current.getNext();
+                }
+            }
+        }
+    }
+
 
 
     public static void main(String[] args){
@@ -79,6 +121,10 @@ public class SpaceDoubleLinkedList {
         testOne.insertToBack("Y");
 
         testOne.search("Z");
+
+        testOne.delete("Z");
+        testOne.delete("Y");
+        testOne.delete("C");
 
         System.out.println("Completed");
 
